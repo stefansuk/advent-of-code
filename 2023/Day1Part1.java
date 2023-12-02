@@ -19,7 +19,6 @@ public class Day1Part1 {
                 if (Character.isDigit(c))
                     last = c;
             }
-            System.out.println(String.valueOf(first) + last);
             sum += Integer.parseInt(String.valueOf(first) + last);
         }
         System.out.println(sum);
