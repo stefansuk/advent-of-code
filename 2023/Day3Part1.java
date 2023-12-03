@@ -11,44 +11,56 @@ public class Day3Part1 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day3Input"));
         lines = input.lines().toList();
-        Pattern p = Pattern.compile("\\d+");
+        Pattern p = Pattern.compile("[#$%&*+\\-/=@]");
         int sum = 0;
         for (int i = 0; i < lines.size(); i++) {
-            boolean checkTop = i > 0;
-            boolean checkBottom = i < lines.size() - 1;
             String line = lines.get(i);
             Matcher m = p.matcher(line);
             while (m.find()) {
-                boolean addValue = false;
-                for (int j = m.start(); j < m.end(); j++) {
-                    boolean checkLeft = j > 0;
-                    boolean checkRight = j < line.length() - 1;
-                    if (checkTop && (checkLeft && isSymbol(i - 1, j - 1)
-                            || isSymbol(i - 1, j)
-                            || checkRight && isSymbol(i - 1, j + 1))) {
-                        addValue = true;
-                        break;
-                    }
-                    if ((checkLeft && isSymbol(i, j - 1))
-                            || (checkRight && isSymbol(i, j + 1))) {
-                        addValue = true;
-                        break;
-                    }
-                    if (checkBottom && (checkLeft && isSymbol(i + 1, j - 1)
-                            || isSymbol(i + 1, j)
-                            || checkRight && isSymbol(i + 1, j + 1))) {
-                        addValue = true;
-                        break;
-                    }
+                int j = m.start();
+                if (isDigit(i - 1, j))
+                    sum += findNumber(i - 1, j);
+                else {
+                    if (isDigit(i - 1, j - 1))
+                        sum += findNumber(i - 1, j - 1);
+                    if (isDigit(i - 1, j + 1))
+                        sum += findNumber(i - 1, j + 1);
                 }
-                if (addValue)
-                    sum += Integer.parseInt(m.group());
+                if (isDigit(i, j - 1))
+                    sum += findNumber(i, j - 1);
+                if (isDigit(i, j + 1))
+                    sum += findNumber(i, j + 1);
+                if (isDigit(i + 1, j))
+                    sum += findNumber(i + 1, j);
+                else {
+                    if (isDigit(i + 1, j - 1))
+                        sum += findNumber(i + 1, j - 1);
+                    if (isDigit(i + 1, j + 1))
+                        sum += findNumber(i + 1, j + 1);
+                }
             }
         }
         System.out.println(sum);
     }
 
-    private static boolean isSymbol(int line, int index) {
-        return "#$%&*+-/=@".contains(String.valueOf(lines.get(line).charAt(index)));
+    private static boolean isDigit(int line, int index) {
+        return Character.isDigit(lines.get(line).charAt(index));
+    }
+
+    private static int findNumber(int line, int index) {
+        char[] chars = lines.get(line).substring(index - 2, index + 3).toCharArray();
+        String numString = "";
+        if (Character.isDigit(chars[1])) {
+            if (Character.isDigit(chars[0]))
+                numString += chars[0];
+            numString += chars[1];
+        }
+        numString += chars[2];
+        if (Character.isDigit(chars[3])) {
+            numString += chars[3];
+            if (Character.isDigit(chars[4]))
+                numString += chars[4];
+        }
+        return Integer.parseInt(numString);
     }
 }
