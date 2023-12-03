@@ -6,10 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day3Part1 {
+    private static List<String> lines;
+
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day3Input"));
-        List<String> lines = input.lines().toList();
-        String symbols = "#$%&*+-/=@";
+        lines = input.lines().toList();
         Pattern p = Pattern.compile("\\d+");
         int sum = 0;
         for (int i = 0; i < lines.size(); i++) {
@@ -22,20 +23,20 @@ public class Day3Part1 {
                 for (int j = m.start(); j < m.end(); j++) {
                     boolean checkLeft = j > 0;
                     boolean checkRight = j < line.length() - 1;
-                    if (checkTop && (checkLeft && symbols.contains(lines.get(i - 1).substring(j - 1, j))
-                            || symbols.contains(lines.get(i - 1).substring(j, j + 1))
-                            || checkRight && symbols.contains(lines.get(i - 1).substring(j + 1, j + 2)))) {
+                    if (checkTop && (checkLeft && isSymbol(i - 1, j - 1)
+                            || isSymbol(i - 1, j)
+                            || checkRight && isSymbol(i - 1, j + 1))) {
                         addValue = true;
                         break;
                     }
-                    if ((checkLeft && symbols.contains(line.substring(j - 1, j)))
-                            || (checkRight && symbols.contains(line.substring(j + 1, j + 2)))) {
+                    if ((checkLeft && isSymbol(i, j - 1))
+                            || (checkRight && isSymbol(i, j + 1))) {
                         addValue = true;
                         break;
                     }
-                    if (checkBottom && (checkLeft && symbols.contains(lines.get(i + 1).substring(j - 1, j))
-                            || symbols.contains(lines.get(i + 1).substring(j, j + 1))
-                            || checkRight && symbols.contains(lines.get(i + 1).substring(j + 1, j + 2)))) {
+                    if (checkBottom && (checkLeft && isSymbol(i + 1, j - 1)
+                            || isSymbol(i + 1, j)
+                            || checkRight && isSymbol(i + 1, j + 1))) {
                         addValue = true;
                         break;
                     }
@@ -45,5 +46,9 @@ public class Day3Part1 {
             }
         }
         System.out.println(sum);
+    }
+
+    private static boolean isSymbol(int line, int index) {
+        return "#$%&*+-/=@".contains(String.valueOf(lines.get(line).charAt(index)));
     }
 }
