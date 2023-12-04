@@ -18,17 +18,14 @@ public class Day4Part1 {
             List<Integer> numbersYouHave = new ArrayList<>();
             Matcher m1 = p1.matcher(line);
             Matcher m2 = p2.matcher(line);
-            while (m1.find()) {
+            while (m1.find())
                 winningNumbers.add(Integer.parseInt(m1.group()));
-            }
-            while (m2.find()) {
+            while (m2.find())
                 numbersYouHave.add(Integer.parseInt(m2.group()));
-            }
             int winners = 0;
-            for (int numberYouHave : numbersYouHave) {
+            for (int numberYouHave : numbersYouHave)
                 if (winningNumbers.contains(numberYouHave))
                     winners++;
-            }
             sum += (int) Math.pow(2, winners - 1);
         }
         System.out.println(sum);
