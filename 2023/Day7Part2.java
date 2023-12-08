@@ -30,8 +30,9 @@ public class Day7Part2 {
         Pattern p = Pattern.compile("(\\w{5})\\s(\\d+)");
         Matcher m = p.matcher(input);
         record Pair(int score, int bid) {}
-        Pair[] pairs = new Pair[1000];
-        for (int i = 0; i < 1000; i++) {
+        int lineCount = (int) input.lines().count();
+        Pair[] pairs = new Pair[lineCount];
+        for (int i = 0; i < lineCount; i++) {
             if (m.find()) {
                 String cards = m.group(1);
                 Map<Character, Integer> cardCount = new HashMap<>();
