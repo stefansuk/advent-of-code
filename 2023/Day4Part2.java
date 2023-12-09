@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
 public class Day4Part2 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day4Input"));
-        List<String> lines = input.lines().toList();
-        int[] copies = new int[lines.size()];
+        String[] lines = input.lines().toArray(String[]::new);
+        int[] copies = new int[lines.length];
         Arrays.fill(copies, 1);
         Pattern p1 = Pattern.compile("(?!.*:)\\d{1,2}(?=.*\\|)");
         Pattern p2 = Pattern.compile("(?!.*\\|)\\d{1,2}");
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i];
             List<Integer> winningNumbers = new ArrayList<>();
             List<Integer> numbersYouHave = new ArrayList<>();
             Matcher m1 = p1.matcher(line);
