@@ -11,7 +11,6 @@ public class Day1Part2 {
         String input = Files.readString(Path.of("2023/Day1Input"));
         List<String> lines = input.lines().toList();
         Map<String, Character> numberMap = Map.of(
-                "zero", '0',
                 "one", '1',
                 "two", '2',
                 "three", '3',
@@ -22,7 +21,7 @@ public class Day1Part2 {
                 "eight", '8',
                 "nine", '9'
         );
-        Pattern p = Pattern.compile("zero|one|two|three|four|five|six|seven|eight|nine");
+        Pattern p = Pattern.compile("one|two|three|four|five|six|seven|eight|nine");
         int sum = 0;
         for (String line : lines) {
             char[] chars = line.toCharArray();
