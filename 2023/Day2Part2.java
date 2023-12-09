@@ -1,14 +1,13 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day2Part2 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day2Input"));
-        List<String> lines = input.lines().toList();
+        String[] lines = input.lines().toArray(String[]::new);
         Pattern p = Pattern.compile("(\\d+) (red|green|blue)");
         int sum = 0;
         for (String line : lines) {
