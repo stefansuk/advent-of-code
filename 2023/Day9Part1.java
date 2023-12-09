@@ -7,7 +7,9 @@ public class Day9Part1 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day9Input"));
         int[][] lines = input.lines()
-                .map(l -> Arrays.stream(l.split("\\s")).mapToInt(Integer::parseInt).toArray())
+                .map(l -> Arrays.stream(l.split("\\s"))
+                        .mapToInt(Integer::parseInt)
+                        .toArray())
                 .toArray(int[][]::new);
         int sum = 0;
         for (int[] line : lines) {
