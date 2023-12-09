@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +8,7 @@ import java.util.regex.Pattern;
 public class Day1Part2 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day1Input"));
-        List<String> lines = input.lines().toList();
+        String[] lines = input.lines().toArray(String[]::new);
         Map<String, Character> numberMap = Map.of(
                 "one", '1',
                 "two", '2',
