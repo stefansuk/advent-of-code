@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class Day4Part1 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day4Input"));
-        List<String> lines = input.lines().toList();
+        String[] lines = input.lines().toArray(String[]::new);
         Pattern p1 = Pattern.compile("(?!.*:)\\d{1,2}(?=.*\\|)");
         Pattern p2 = Pattern.compile("(?!.*\\|)\\d{1,2}");
         int sum = 0;
