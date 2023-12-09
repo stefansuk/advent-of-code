@@ -1,20 +1,19 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day3Part1 {
-    private static List<String> lines;
+    private static String[] lines;
 
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day3Input"));
-        lines = input.lines().toList();
+        lines = input.lines().toArray(String[]::new);
         Pattern p = Pattern.compile("[#$%&*+\\-/=@]");
         int sum = 0;
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i];
             Matcher m = p.matcher(line);
             while (m.find()) {
                 int j = m.start();
@@ -44,11 +43,11 @@ public class Day3Part1 {
     }
 
     private static boolean isDigit(int line, int index) {
-        return Character.isDigit(lines.get(line).charAt(index));
+        return Character.isDigit(lines[line].charAt(index));
     }
 
     private static int findNumber(int line, int index) {
-        char[] chars = lines.get(line).substring(index - 2, index + 3).toCharArray();
+        char[] chars = lines[line].substring(index - 2, index + 3).toCharArray();
         String numString = "";
         if (Character.isDigit(chars[1])) {
             if (Character.isDigit(chars[0]))
