@@ -6,7 +6,7 @@ public class Day10Part1 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day10Input"));
         char[][] tiles = input.lines().map(String::toCharArray).toArray(char[][]::new);
-        int y = input.indexOf('S') / tiles[0].length;
+        int y = input.indexOf('S') / (tiles[0].length + 1);
         int x = input.indexOf('S') % (tiles[0].length + 1);
         char lastDirection;
         if (y > 0 && (tiles[y - 1][x] == '7' || tiles[y - 1][x] == '|' || tiles[y - 1][x] == 'F')) {
