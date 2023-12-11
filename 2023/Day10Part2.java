@@ -20,6 +20,7 @@ public class Day10Part2 {
         } else {
             lastDirection = 'E'; x++;
         }
+        char startingDirection = lastDirection;
         while (tiles[y][x] != 'S') {
             switch (tiles[y][x]) {
                 case '7' -> { tiles[y][x] = '1'; if (lastDirection == 'N') { lastDirection = 'W'; x--; } else { lastDirection = 'S'; y++; } }
@@ -29,6 +30,11 @@ public class Day10Part2 {
                 case '|' -> { tiles[y][x] = '5'; if (lastDirection == 'N') { y--; } else { y++; } }
                 case '-' -> { tiles[y][x] = '6'; if (lastDirection == 'W') { x--; } else { x++; } }
             }
+        }
+        switch (lastDirection) {
+            case 'N' -> tiles[y][x] = startingDirection == 'W' ? '1' : startingDirection == 'E' ? '2' : '5';
+            case 'W' -> tiles[y][x] = startingDirection == 'N' ? '3' : '6';
+            case 'E' -> tiles[y][x] = '4';
         }
         Pattern p = Pattern.compile("(5|36*1|26*4)(.*?)(5|36*1|26*4)");
         Matcher m = p.matcher(Arrays.stream(tiles).map(String::new).collect(Collectors.joining("\n")));
