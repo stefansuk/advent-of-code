@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 public class Day11Part1 {
     public static void main(String[] args) throws IOException {
         String input = Files.readString(Path.of("2023/Day11Input"));
-        String universe = input.replaceAll("(?m)^\\.*$", "$0\n$0");
-        universe = transpose(universe);
-        universe = universe.replaceAll("(?m)^\\.*$", "$0\n$0");
+        input = input.replaceAll("(?m)^\\.*$", "$0\n$0");
+        input = transpose(input);
+        input = input.replaceAll("(?m)^\\.*$", "$0\n$0");
         Pattern p = Pattern.compile("#");
-        Matcher m = p.matcher(universe);
+        Matcher m = p.matcher(input);
         List<int[]> galaxies = new ArrayList<>();
         while (m.find())
-            galaxies.add(new int[] { m.start() / (universe.indexOf('\n') + 1), m.start() % (universe.indexOf('\n') + 1)});
+            galaxies.add(new int[] { m.start() / (input.indexOf('\n') + 1), m.start() % (input.indexOf('\n') + 1)});
         int sum = 0;
         for (int i = 0; i < galaxies.size(); i++)
             for (int j = i + 1; j < galaxies.size(); j++)
