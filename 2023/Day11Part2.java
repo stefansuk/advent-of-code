@@ -43,7 +43,7 @@ public class Day11Part2 {
         char[][] outputChars = new char[inputChars[0].length][inputChars.length];
         for (int i = 0; i < inputChars.length; i++)
             for (int j = 0; j < inputChars[0].length; j++)
-                outputChars[j][i] = inputChars [i][j];
+                outputChars[j][i] = inputChars[i][j];
         return Arrays.stream(outputChars).map(String::new).collect(Collectors.joining("\n"));
     }
 }
