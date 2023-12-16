@@ -25,7 +25,7 @@ public class Day11Part2 {
         Matcher m2 = p2.matcher(input);
         List<int[]> galaxies = new ArrayList<>();
         while (m2.find())
-            galaxies.add(new int[] { m2.start() / (input.indexOf('\n') + 1), m2.start() % (input.indexOf('\n') + 1)});
+            galaxies.add(new int[] { m2.start() / (input.indexOf('\n') + 1), m2.start() % (input.indexOf('\n') + 1) });
         long sum = 0;
         for (int i = 0; i < galaxies.size(); i++)
             for (int j = i + 1; j < galaxies.size(); j++) {
