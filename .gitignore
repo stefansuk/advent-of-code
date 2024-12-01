@@ -1,3 +1,4 @@
 .idea
 advent-of-code.iml
-out
+target
+project.clj
