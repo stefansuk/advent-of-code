@@ -6,4 +6,4 @@
                              (get (frequencies (last lists)) x 0)))
                    (first lists)))
 (def sum (apply + products))
-(print sum)
+(println sum)
