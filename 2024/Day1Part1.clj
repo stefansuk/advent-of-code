@@ -5,4 +5,4 @@
                              (map #(Integer/parseInt %) (sort (first lists)))
                              (map #(Integer/parseInt %) (sort (last lists))))))
 (def sum (apply + distances))
-(print sum)
+(println sum)
