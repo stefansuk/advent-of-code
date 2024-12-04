@@ -10,13 +10,13 @@
                         x (range width)
                         d directions
                         :when (let [w (- (count word) 1)]
-                                (and (>= (+ x (* (nth d 0) w)) 0)
-                                     (< (+ x (* (nth d 0) w)) width)
-                                     (>= (+ y (* (nth d 1) w)) 0)
-                                     (< (+ y (* (nth d 1) w)) height)))
+                                (and (>= (+ x (* (first d) w)) 0)
+                                     (< (+ x (* (first d) w)) width)
+                                     (>= (+ y (* (last d) w)) 0)
+                                     (< (+ y (* (last d) w)) height)))
                         :when (every? #(-> grid
-                                           (nth (+ y (* (nth d 1) %)))
-                                           (nth (+ x (* (nth d 0) %)))
+                                           (nth (+ y (* (last d) %)))
+                                           (nth (+ x (* (first d) %)))
                                            (= (nth word %)))
                                       (range (count word)))]
                     1)))
