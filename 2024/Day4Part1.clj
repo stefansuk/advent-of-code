@@ -20,3 +20,4 @@
                                            (= (nth word %)))
                                       (range (count word)))]
                     1)))
+(println total)
