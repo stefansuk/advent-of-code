@@ -1,0 +1,25 @@
+(require '[clojure.string :as str])
+
+(def input (slurp "2024/Day4Input"))
+(def word "AMMSS")
+(def width (dec (count (re-find #".*\n" input))))
+(def grid (partition width (str/replace input #"\n" "")))
+(def height (count grid))
+(def directions [[1 1] [-1 1] [-1 -1] [1 -1]])
+(def shapes (map #(conj % [0 0])
+                 (map #(drop % (take (+ % 4) (cycle directions)))
+                      (range (count directions)))))
+(def total (count (for [y (range height)
+                        x (range width)
+                        :when (and (>= (dec x) 0)
+                                   (< (inc x) width)
+                                   (>= (dec y) 0)
+                                   (< (inc y) height))
+                        s shapes
+                        :when (every? #(-> grid
+                                           (nth (last (first %)))
+                                           (nth (first (first %)))
+                                           (= (last %)))
+                                      (map vector (map (fn [[a b]] [(+ x a) (+ y b)]) s) word))]
+                    1)))
+(println total)
