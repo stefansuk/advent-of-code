@@ -3,4 +3,4 @@
                           (Integer/parseInt (get % 1))
                           (Integer/parseInt (get % 2)))
                        (re-seq #"mul\((\d+),(\d+)\)" input))))
-(print sum)
+(println sum)
