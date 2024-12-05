@@ -6,10 +6,10 @@
                  (map #(str/split % #"\n"))
                  (map (fn [x] (map #(str/split % #"\||,") x)))))
 (def rules (set (first numbers)))
-(def pages (last numbers))
+(def updates (last numbers))
 (def sum (apply + (keep (fn [x] (when
                                   (every? #(contains? rules %)
                                           (map vec (partition 2 1 x)))
                                   (Integer/parseInt (nth x (quot (count x) 2)))))
-                        pages)))
+                        updates)))
 (println sum)
