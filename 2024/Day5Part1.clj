@@ -9,7 +9,7 @@
 (def updates (last numbers))
 (def sum (apply + (keep (fn [x] (when
                                   (every? #(contains? rules %)
-                                          (map vec (partition 2 1 x)))
+                                          (partitionv 2 1 x))
                                   (Integer/parseInt (nth x (quot (count x) 2)))))
                         updates)))
 (println sum)
