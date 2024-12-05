@@ -6,7 +6,7 @@
                  (map #(str/split % #"\n"))
                  (map (fn [x] (map #(str/split % #"\||,") x)))))
 (def rules (set (first numbers)))
-(def updates (last numbers))
+(def updates (second numbers))
 (def sum (apply + (keep (fn [x] (when
                                   (every? #(contains? rules %)
                                           (partitionv 2 1 x))
