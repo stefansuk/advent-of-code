@@ -3,7 +3,7 @@
 (def lists (apply map vector (map (fn [x] (rest x)) lines)))
 (def products (map (fn [x] (*
                              (#(Integer/parseInt %) x)
-                             (get (frequencies (last lists)) x 0)))
+                             (get (frequencies (second lists)) x 0)))
                    (first lists)))
 (def sum (apply + products))
 (println sum)
