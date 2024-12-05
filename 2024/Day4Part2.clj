@@ -17,9 +17,9 @@
                                    (< (inc y) height))
                         s shapes
                         :when (every? #(-> grid
-                                           (nth (last (first %)))
+                                           (nth (second (first %)))
                                            (nth (first (first %)))
-                                           (= (last %)))
+                                           (= (second %)))
                                       (map vector (map (fn [[a b]] [(+ x a) (+ y b)]) s) word))]
                     1)))
 (println total)
