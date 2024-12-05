@@ -12,10 +12,10 @@
                         :when (let [w (dec (count word))]
                                 (and (>= (+ x (* (first d) w)) 0)
                                      (< (+ x (* (first d) w)) width)
-                                     (>= (+ y (* (last d) w)) 0)
-                                     (< (+ y (* (last d) w)) height)))
+                                     (>= (+ y (* (second d) w)) 0)
+                                     (< (+ y (* (second d) w)) height)))
                         :when (every? #(-> grid
-                                           (nth (+ y (* (last d) %)))
+                                           (nth (+ y (* (second d) %)))
                                            (nth (+ x (* (first d) %)))
                                            (= (nth word %)))
                                       (range (count word)))]
