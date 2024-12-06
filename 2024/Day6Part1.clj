@@ -9,7 +9,7 @@
                     col (range width)
                     :when (= \^ (get-in grid [row col]))]
                 [col row])))
-(def path (assoc grid (c 1) (assoc (grid (c 1)) (c 0) \X)))
+(def path (assoc-in grid [(c 1) (c 0)] \X))
 (def visited (loop [p path
                     x (get c 0)
                     y (get c 1)
@@ -25,7 +25,7 @@
                             x
                             y
                             (into (vec (rest d)) [(first d)]))
-                     (recur (assoc p (+ y dy) (assoc (p (+ y dy)) (+ x dx) \X))
+                     (recur (assoc-in p [(+ y dy) (+ x dx)] \X)
                             (+ x dx)
                             (+ y dy)
                             d))
