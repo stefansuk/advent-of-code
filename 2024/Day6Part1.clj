@@ -20,7 +20,7 @@
                        (>= (+ y dy) 0)
                        (< (+ x dx) width)
                        (< (+ y dy) height))
-                (if (= \# (get-in p [(+ y dy) (+ x dx)]))
+                (if (= \# (get-in grid [(+ y dy) (+ x dx)]))
                   (recur p
                          x
                          y
