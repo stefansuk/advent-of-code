@@ -9,8 +9,8 @@
                     col (range width)
                     :when (= \^ (get-in grid [row col]))]
                 [col row])))
-(def grid (assoc grid (c 1) (assoc (grid (c 1)) (c 0) \X)))
-(def path (loop [g grid
+(def path (assoc grid (c 1) (assoc (grid (c 1)) (c 0) \X)))
+(def visited (loop [p path
                  x (get c 0)
                  y (get c 1)
                  d directions]
@@ -20,15 +20,15 @@
                        (>= (+ y dy) 0)
                        (< (+ x dx) width)
                        (< (+ y dy) height))
-                (if (= \# (get-in g [(+ y dy) (+ x dx)]))
-                  (recur g
+                (if (= \# (get-in p [(+ y dy) (+ x dx)]))
+                  (recur p
                          x
                          y
                          (into (vec (rest d)) [(first d)]))
-                  (recur (assoc g (+ y dy) (assoc (g (+ y dy)) (+ x dx) \X))
+                  (recur (assoc p (+ y dy) (assoc (p (+ y dy)) (+ x dx) \X))
                          (+ x dx)
                          (+ y dy)
                          d))
-                g))))
-(def total (count (filter #(= \X %) (flatten path))))
+                p))))
+(def total (count (filter #(= \X %) (flatten visited))))
 (println total)
