@@ -3,18 +3,19 @@
 (def input (slurp "2024/Day7Input"))
 (def lines (map (fn [x] (map #(Long/parseLong %) (re-seq #"\d+" x))) (str/split-lines input)))
 
-(defn check? [m n]
-  (when (> (count n) 0)
-    (or (and (= (count n) 1)
-             (= m (first n)))
-        (and (= (mod m (first n)) 0)
-             (check? (quot m (first n)) (rest n)))
-        (and (> m (first n))
-             (check? (- m (first n)) (rest n))))))
+(defn check? [y xs]
+  (when (> (count xs) 0)
+    (let [x (first xs)]
+      (or (and (= (count xs) 1)
+               (= y x))
+          (and (= (mod y x) 0)
+               (check? (quot y x) (rest xs)))
+          (and (> y x)
+               (check? (- y x) (rest xs)))))))
 
 (def sum (reduce + (for [l lines
-                         :let [m (first l)
-                               n (reverse (rest l))]
-                         :when (check? m n)]
-                     m)))
+                         :let [y (first l)
+                               xs (reverse (rest l))]
+                         :when (check? y xs)]
+                     y)))
 (println sum)
