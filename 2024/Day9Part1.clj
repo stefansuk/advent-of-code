@@ -26,8 +26,8 @@
                      (recur d (+ start 2) end))
                    :else
                    (let [d (-> sdisk
-                               (assoc-in [start :id] (ev :id))
-                               (dissoc end))]
+                               (dissoc start)
+                               (assoc-in [end :index] (sv :index)))]
                      (recur d (+ start 2) (- end 2))))))))
 (def checksum (reduce + (for [[_ file] edisk
                          i (map #(+ % (file :index)) (range (file :length)))
