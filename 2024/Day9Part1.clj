@@ -29,8 +29,8 @@
                                (assoc-in [start :id] (ev :id))
                                (dissoc end))]
                      (recur d (+ start 2) (- end 2))))))))
-(def sum (reduce + (for [[_ file] edisk
+(def checksum (reduce + (for [[_ file] edisk
                          i (map #(+ % (file :index)) (range (file :length)))
                          :when (not (nil? (file :id)))]
                      (* i (file :id)))))
-(println sum)
+(println checksum)
