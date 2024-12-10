@@ -2,7 +2,8 @@
 
 (def input (slurp "2024/Day10Input"))
 (def width (dec (count (re-find #".*\n" input))))
-(def grid (vec (mapv (fn [x] (mapv #(Integer/parseInt (str %)) x)) (partitionv width (str/replace input #"\n" "")))))
+(def grid (vec (mapv (fn [x] (mapv #(Integer/parseInt (str %)) x))
+                     (partitionv width (str/replace input #"\n" "")))))
 (def height (count grid))
 (def directions [[1 0] [0 1] [-1 0] [0 -1]])
 (def trailheads (for [row (range height)
