@@ -11,15 +11,15 @@
                       :when (= (get-in grid [row col]) 0)]
                   [col row]))
 
-(defn score [x y]
+(defn rating [x y]
   (if (= (get-in grid [y x]) 9)
     1
     (reduce +
             (for [d directions
                   :when (= (get-in grid [(+ y (d 1)) (+ x (d 0))])
                            (+ (get-in grid [y x]) 1))]
-              (score (+ x (d 0)) (+ y (d 1)))))))
+              (rating (+ x (d 0)) (+ y (d 1)))))))
 
 (def sum (reduce + (for [t trailheads]
-                     (score (t 0) (t 1)))))
+                     (rating (t 0) (t 1)))))
 (println sum)
