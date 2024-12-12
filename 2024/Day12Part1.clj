@@ -17,8 +17,8 @@
         a (reduce + (map first ap))
         p (reduce + (map second ap))
         perimeter (count (for [d directions
-                               :when (not (= (get-in grid [y x])
-                                             (get-in grid [(+ y (d 1)) (+ x (d 0))])))]
+                               :when (not= (get-in grid [y x])
+                                           (get-in grid [(+ y (d 1)) (+ x (d 0))]))]
                            1))]
     [(+ a 1) (+ p perimeter)]))
 
