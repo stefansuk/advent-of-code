@@ -17,7 +17,7 @@
               (and (integer? c)
                    (<= s c)))
       (if (and (= (get-in g [y x]) \E)
-               (< s score))
+               (<= s score))
         (def score s)
         (let [ds (for [d directions
                        :let [dx (+ x (d 0))
