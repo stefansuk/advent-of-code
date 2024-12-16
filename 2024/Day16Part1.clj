@@ -2,7 +2,7 @@
 
 (def input (slurp "2024/Day16Input"))
 (def width (dec (count (re-find #".*\n" input))))
-(def grid (vec (map vec (partition width (str/replace input #"\n" "")))))
+(def grid (vec (partitionv width (str/replace input #"\n" ""))))
 (def height (count grid))
 (def directions [[1 0] [0 1] [-1 0] [0 -1]])
 (def score Integer/MAX_VALUE)
