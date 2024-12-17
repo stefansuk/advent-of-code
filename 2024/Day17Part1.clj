@@ -39,18 +39,18 @@
 
 (loop []
   (when (< pointer (count instructions))
-   (let [opcode (instructions pointer)
-        operand (instructions (inc pointer))]
-    (case opcode
-      0 (adv operand)
-      1 (bxl operand)
-      2 (bst operand)
-      3 (jnz operand)
-      4 (bxc)
-      5 (out operand)
-      6 (bdv operand)
-      7 (cdv operand))
-    (def pointer (+ pointer 2))
-    (recur))))
+    (let [opcode (instructions pointer)
+          operand (instructions (inc pointer))]
+      (case opcode
+        0 (adv operand)
+        1 (bxl operand)
+        2 (bst operand)
+        3 (jnz operand)
+        4 (bxc)
+        5 (out operand)
+        6 (bdv operand)
+        7 (cdv operand))
+      (def pointer (+ pointer 2))
+      (recur))))
 
 (println (str/join "," output))
