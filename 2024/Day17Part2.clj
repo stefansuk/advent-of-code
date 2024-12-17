@@ -2,7 +2,7 @@
 
 (def input (slurp "2024/Day17Input"))
 (def numbers (map #(Integer/parseInt %) (re-seq #"\d+" input)))
-(def registers [0 0 0])
+(def registers)
 (def instructions (vec (drop 3 numbers)))
 (def pointer 0)
 (def output [])
