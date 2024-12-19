@@ -4,11 +4,11 @@
 (def patterns (str/split input #"\n\n"))
 (def towels (str/split (first patterns) #", "))
 (def designs (str/split-lines (second patterns)))
-(def v {})
+(def combinations {})
 
 (defn match [design]
-  (if (contains? v design)
-    (v design)
+  (if (contains? combinations design)
+    (combinations design)
     (let [n (if (empty? design)
               1
               (reduce + (flatten (for [t towels
@@ -16,7 +16,7 @@
                                    (if (re-find p design)
                                      (match (str/replace design p ""))
                                      0)))))]
-      (def v (conj v {design n}))
+      (def combinations (conj combinations {design n}))
       n)))
 
 (def total (reduce + (for [d designs]
