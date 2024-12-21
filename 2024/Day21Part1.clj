@@ -52,9 +52,9 @@
        (mapv #(keys-map %))
        (apply str)))
 
-(def total (reduce + (for [c codes]
-                       (* (count (nth (iterate translate
-                                               (c 0))
-                                      robots))
-                          (c 1)))))
+(def total (reduce + (map #(* (count (nth (iterate translate
+                                                   (% 0))
+                                          robots))
+                              (% 1))
+                          codes)))
 (println total)
