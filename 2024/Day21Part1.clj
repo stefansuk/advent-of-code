@@ -35,12 +35,17 @@
                                          (apply str (repeat y \v))
                                          (apply str (repeat (- x) \<))
                                          \A)
+                                       (and (= ax 0) (= by 4))
+                                       (str
+                                         (apply str (repeat x \>))
+                                         (apply str (repeat (- y) \^))
+                                         \A)
                                        :else
                                        (str
                                          (when (< x 0) (apply str (repeat (- x) \<)))
                                          (when (> y 0) (apply str (repeat y \v)))
-                                         (when (> x 0) (apply str (repeat x \>)))
                                          (when (< y 0) (apply str (repeat (- y) \^)))
+                                         (when (> x 0) (apply str (repeat x \>)))
                                          \A))]]
                          [(str a b) v])))
 
