@@ -1,0 +1,40 @@
+(require '[clojure.string :as str])
+
+(def input (slurp "2024/Day24Input"))
+(def wires (str/split input #"\n\n"))
+(def values (into {} (map #(vector (% 1)
+                                   (Integer/parseInt (% 2)))
+                          (re-seq #"(.+): (\d)" (wires 0)))))
+(def gates (into {} (map #(vector (% 4) [(% 2) (% 1) (% 3)])
+                         (re-seq #"(.+) (.+) (.+) -> (.+)" (wires 1)))))
+(def output (str/join "," (sort (filter identity (map #(when (and (not= (subs % 1) "00")
+                                                                  (not= (subs % 1) "01")
+                                                                  (not= (subs % 1) "45"))
+                                                         (if (not= ((gates %) 0) "XOR")
+                                                           %
+                                                           (let [l ((gates %) 1)
+                                                                 r ((gates %) 2)]
+                                                             (when (and (gates l)
+                                                                        (gates r))
+                                                               (if (or (and (= ((gates l) 0) "XOR")
+                                                                            (not= ((gates r) 0) "OR"))
+                                                                       (and (= ((gates l) 0) "OR")
+                                                                            (not= ((gates r) 0) "XOR")))
+                                                                 r
+                                                                 (if (or (and (= ((gates r) 0) "XOR")
+                                                                              (not= ((gates l) 0) "OR"))
+                                                                         (and (= ((gates r) 0) "OR")
+                                                                              (not= ((gates l) 0) "XOR")))
+                                                                   l
+                                                                   (let [nl (if (= ((gates l) 0) "OR")
+                                                                              ((gates l) 1)
+                                                                              ((gates r) 1))
+                                                                         nr (if (= ((gates l) 0) "OR")
+                                                                              ((gates l) 2)
+                                                                              ((gates r) 2))]
+                                                                     (if (not= ((gates nl) 0) "AND")
+                                                                       nl
+                                                                       (when (not= ((gates nr) 0) "AND")
+                                                                         nr)))))))))
+                                                      (filter #(= (first %) \z) (keys gates)))))))
+(println output)
